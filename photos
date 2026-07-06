@@ -1,0 +1,11 @@
+
+assets/
+├── images/
+│   ├── profile/
+│   ├── ceva/
+│   ├── stef/
+│   ├── education/
+│   └── certifications/
+│
+└── documents/
+    └── CV_Adam_Rezaiguia.pdf
