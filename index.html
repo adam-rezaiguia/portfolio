@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Rezaiguia — International Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0A0F1E;
+  --surface: #111827;
+  --surface2: #161f30;
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(201,168,76,0.35);
+  --gold: #C9A84C;
+  --gold-dim: rgba(201,168,76,0.12);
+  --gold-glow: rgba(201,168,76,0.25);
+  --text: #F0F4FF;
+  --muted: #64748B;
+  --muted2: #94A3B8;
+  --display: 'Playfair Display', Georgia, serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── NAV ──────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(10,15,30,0.92); backdrop-filter: blur(12px);
+  border-color: var(--border);
+}
+.nav-logo { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--text); }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--muted); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+#home {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 48px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 12px; color: var(--gold);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+.hero-name {
+  font-family: var(--display); font-size: clamp(52px, 8vw, 96px);
+  font-weight: 900; line-height: 1.0; color: var(--text);
+  margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.hero-name em { color: var(--gold); font-style: normal; }
+.hero-title {
+  font-family: var(--display); font-size: clamp(18px, 3vw, 28px);
+  font-weight: 400; font-style: italic; color: var(--muted2);
+  margin-bottom: 32px; line-height: 1.4;
+}
+.hero-location {
+  font-family: var(--mono); font-size: 13px; color: var(--muted);
+  letter-spacing: 0.08em; margin-bottom: 40px;
+  display: flex; align-items: center; gap: 8px;
+}
+.location-cycle { color: var(--gold); display: inline-block; min-width: 180px; }
+.hero-bio {
+  font-size: 16px; color: var(--muted2); line-height: 1.8;
+  max-width: 560px; margin-bottom: 40px;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--gold); color: #0A0F1E; font-family: var(--body);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 13px 28px; border-radius: 3px; transition: all 0.2s; border: none; cursor: pointer;
+}
+.btn-primary:hover { background: #dab95a; transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent; color: var(--muted2); font-family: var(--body);
+  font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 13px 28px; border-radius: 3px; border: 1px solid var(--border);
+  transition: all 0.2s; cursor: pointer;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.hero-langs {
+  margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border);
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+.lang-item { display: flex; flex-direction: column; gap: 3px; }
+.lang-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.lang-level { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ── SECTIONS ─────────────────────────────────────────────────── */
+section { padding: 100px 48px; }
+.section-label {
+  font-family: var(--mono); font-size: 11px; color: var(--gold);
+  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: var(--display); font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700; line-height: 1.15; color: var(--text); margin-bottom: 16px;
+}
+.section-sub { font-size: 15px; color: var(--muted); max-width: 500px; line-height: 1.7; margin-bottom: 56px; }
+.section-divider { width: 100%; height: 1px; background: var(--border); margin: 0 48px; width: calc(100% - 96px); }
+
+/* ── ABOUT ────────────────────────────────────────────────────── */
+#about { background: var(--surface); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.about-text p { font-size: 15px; color: var(--muted2); line-height: 1.85; margin-bottom: 18px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 600; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.stat-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 24px 20px; transition: border-color 0.2s;
+}
+.stat-card:hover { border-color: var(--border-hover); }
+.stat-num { font-family: var(--display); font-size: 36px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+.stat-desc { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ── EDUCATION ────────────────────────────────────────────────── */
+.edu-grid { display: flex; flex-direction: column; gap: 20px; }
+.edu-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 28px 32px; display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: start; transition: border-color 0.25s;
+}
+.edu-card:hover { border-color: var(--border-hover); }
+.edu-school { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.edu-degree { font-size: 14px; color: var(--muted2); margin-bottom: 10px; }
+.edu-details { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.edu-date { font-family: var(--mono); font-size: 11px; color: var(--gold); text-align: right; white-space: nowrap; letter-spacing: 0.06em; }
+.edu-badge {
+  display: inline-block; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 3px 9px; border-radius: 3px; margin-top: 8px;
+}
+
+/* ── EXPERIENCE ───────────────────────────────────────────────── */
+#experience { background: var(--surface); }
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.timeline-item { position: relative; margin-bottom: 48px; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -36px; top: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--gold); border: 2px solid var(--bg);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+}
+.timeline-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 28px 32px; transition: border-color 0.25s;
+}
+.timeline-card:hover { border-color: var(--border-hover); }
+.timeline-header { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+.timeline-role { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--text); }
+.timeline-date { font-family: var(--mono); font-size: 11px; color: var(--gold); text-align: right; white-space: nowrap; letter-spacing: 0.06em; }
+.timeline-company { font-size: 13px; color: var(--gold); font-weight: 500; margin-bottom: 4px; }
+.timeline-location { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 16px; letter-spacing: 0.04em; }
+.timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.timeline-bullets li { font-size: 14px; color: var(--muted2); padding-left: 16px; position: relative; line-height: 1.6; }
+.timeline-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 12px; }
+
+/* ── PROJECTS ─────────────────────────────────────────────────── */
+.projects-grid { display: flex; flex-direction: column; gap: 28px; }
+.project-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 36px 40px; transition: border-color 0.25s;
+  position: relative; overflow: hidden;
+}
+.project-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: transparent; transition: background 0.25s;
+}
+.project-card:hover { border-color: var(--border-hover); }
+.project-card:hover::before { background: var(--gold); }
+.project-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+.project-tag {
+  background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold); font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 3px;
+}
+.project-date { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+.project-title { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+.project-org { font-size: 13px; color: var(--gold); font-weight: 500; margin-bottom: 20px; }
+.project-section { margin-bottom: 18px; }
+.project-section-label { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 7px; }
+.project-section p { font-size: 14px; color: var(--muted2); line-height: 1.75; }
+.project-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.project-bullets li { font-size: 14px; color: var(--muted2); padding-left: 16px; position: relative; line-height: 1.6; }
+.project-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 12px; }
+.project-impact {
+  background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.2);
+  border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0;
+  padding: 14px 18px; margin-top: 20px; font-size: 14px; color: var(--muted2); line-height: 1.7;
+}
+.project-skills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+.skill-tag {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 3px;
+  padding: 4px 10px; font-size: 11px; color: var(--muted); font-family: var(--mono);
+}
+.project-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.stack-tag {
+  background: transparent; border: 1px solid var(--border); border-radius: 3px;
+  padding: 3px 9px; font-size: 11px; color: var(--muted); font-family: var(--mono);
+}
+
+/* ── CERTIFICATIONS ───────────────────────────────────────────── */
+#certifications { background: var(--surface); }
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.cert-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 28px 24px; transition: border-color 0.25s;
+}
+.cert-card:hover { border-color: var(--border-hover); }
+.cert-icon { font-size: 28px; margin-bottom: 14px; }
+.cert-name { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.cert-issuer { font-size: 13px; color: var(--gold); font-weight: 500; margin-bottom: 4px; }
+.cert-date { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+.cert-score { display: inline-block; margin-top: 12px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-family: var(--mono); font-size: 12px; padding: 3px 10px; border-radius: 3px; }
+
+/* ── CONTACT ──────────────────────────────────────────────────── */
+#contact { text-align: center; padding: 120px 48px; }
+.contact-title { font-family: var(--display); font-size: clamp(36px, 6vw, 64px); font-weight: 900; color: var(--text); margin-bottom: 16px; }
+.contact-sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; }
+.contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.contact-link {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 14px 24px;
+  font-size: 14px; font-weight: 500; color: var(--muted2);
+  transition: all 0.2s;
+}
+.contact-link:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border); padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 11px; color: var(--muted);
+  letter-spacing: 0.06em; flex-wrap: wrap; gap: 12px;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  section, #home, #contact { padding: 72px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .edu-card { grid-template-columns: 1fr; }
+  .edu-date { text-align: left; }
+  .timeline { padding-left: 20px; }
+  .timeline-dot { left: -24px; }
+  .timeline-header { flex-direction: column; gap: 4px; }
+  .project-card { padding: 24px; }
+  footer { flex-direction: column; text-align: center; }
+  .section-divider { margin: 0 24px; width: calc(100% - 48px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Adam <span>Rezaiguia</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">International Business</div>
+    <h1 class="hero-name">Adam<br><em>Rezaiguia</em></h1>
+    <p class="hero-title">Supply Chain · Marketing · Global Business</p>
+    <div class="hero-location">
+      📍 <span class="location-cycle" id="location-cycle">Qingdao, China</span>
+    </div>
+    <p class="hero-bio">
+      International Business student specialising in Supply Chain and Global Commerce.
+      Experienced across logistics operations, B2B marketing, and cross-cultural business environments —
+      from cold chain warehouses in France to automotive logistics in Romania and a master's programme in China.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+    <div class="hero-langs">
+      <div class="lang-item"><span class="lang-name">French</span><span class="lang-level">Native</span></div>
+      <div class="lang-item"><span class="lang-name">English</span><span class="lang-level">C2 · TOEFL 118/120</span></div>
+      <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-level">Fluent</span></div>
+      <div class="lang-item"><span class="lang-name">Arabic</span><span class="lang-level">Fluent</span></div>
+      <div class="lang-item"><span class="lang-name">Chinese</span><span class="lang-level">Beginner · HSK1</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="section-title">A Global Profile<br>Built on the Field</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a final-year <strong>Economics & Management – Marketing</strong> student at IAE Orléans,
+        heading to <strong>Ocean University of China (Qingdao)</strong> for a Master's in International Business.
+        My profile sits at the intersection of supply chain, international commerce, and marketing —
+        grounded in real operational experience.
+      </p>
+      <p>
+        Before and during my studies, I worked nearly two years at <strong>STEF</strong> in cold chain logistics —
+        order picking, dock operations, inventory — which gave me a hands-on understanding of
+        supply chain realities that most business students never get.
+      </p>
+      <p>
+        My internship at <strong>CEVA Logistics Romania</strong> in Finished Vehicle Logistics
+        exposed me to international B2B marketing, market research, and the kind of
+        cross-functional projects that sit between business development and operations.
+      </p>
+      <p>
+        I'm driven by global environments, complex logistics challenges, and the opportunity
+        to bridge business strategy with operational execution.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-desc">Languages spoken</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-desc">Countries studied & worked in</div></div>
+      <div class="stat-card"><div class="stat-num">2</div><div class="stat-desc">Years in logistics operations</div></div>
+      <div class="stat-card"><div class="stat-num">118</div><div class="stat-desc">TOEFL score / 120</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education</div>
+  <div class="section-title">Academic Path</div>
+  <p class="section-sub">From Orléans to Qingdao, via Lithuania and Munich.</p>
+  <div class="edu-grid">
+
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">Ocean University of China</div>
+        <div class="edu-degree">Master's in International Business — Qingdao, China</div>
+        <div class="edu-details">Incoming student — Full-time on-site programme in one of China's leading international business institutions.</div>
+        <span class="edu-badge">Upcoming</span>
+      </div>
+      <div class="edu-date">2026 →</div>
+    </div>
+
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">LMU Munich</div>
+        <div class="edu-degree">Summer Programme — International Management & Communications</div>
+        <div class="edu-details">3-week intensive on-site programme. Focus on international management, cross-cultural communications, and global business strategy.</div>
+      </div>
+      <div class="edu-date">Aug 2026</div>
+    </div>
+
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">Klaipėda State University (KVK)</div>
+        <div class="edu-degree">Blended Intensive Programme (BIP) — Contemporary Challenges of Management</div>
+        <div class="edu-details">
+          Grade: 10/10 · 3 days remote + 5 days on-site in Klaipėda, Lithuania.<br>
+          Modules: AI in organisations, Sustainability & Innovation, Neuromarketing, Consumer Behaviour in Digital Environments, Volunteering in Business.
+        </div>
+        <span class="edu-badge">10 / 10</span>
+      </div>
+      <div class="edu-date">Mar – Apr 2026</div>
+    </div>
+
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">IAE Orléans — Université d'Orléans</div>
+        <div class="edu-degree">Bachelor's Degree, Economics & Management — Marketing Track</div>
+        <div class="edu-details">3-year programme covering marketing strategy, business economics, international trade, and management fundamentals.</div>
+      </div>
+      <div class="edu-date">2023 – 2026</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <div class="section-title">Where I've Worked</div>
+  <p class="section-sub">Hands-on roles across logistics operations, B2B marketing, and data.</p>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-role">International B2B Marketing Intern — FVL</div>
+          <div class="timeline-date">May 2026 – Present</div>
+        </div>
+        <div class="timeline-company">CEVA Logistics</div>
+        <div class="timeline-location">📍 Bucharest, Romania</div>
+        <ul class="timeline-bullets">
+          <li>Built an interactive HTML/CSS/JS map of all European FVL compounds, replacing static PowerPoint presentations used by the sales force — delivered as a fully autonomous, self-contained tool</li>
+          <li>Conducted a comprehensive market study on Chinese OEM manufacturers in Europe, identifying commercial opportunities for the FVL division</li>
+          <li>Created LinkedIn content for the FVL Europe marketing department</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-role">Logistics Operations — Order Picking & Dock</div>
+          <div class="timeline-date">Jun 2024 – Apr 2026</div>
+        </div>
+        <div class="timeline-company">STEF</div>
+        <div class="timeline-location">📍 Ormes, France · 1 yr 11 mos</div>
+        <ul class="timeline-bullets">
+          <li>Hands-on experience in cold chain logistics operations in a temperature-controlled environment</li>
+          <li>Order preparation, inventory handling, and shipment processing under strict temperature compliance</li>
+          <li>Contributed to operational efficiency in a high-volume, time-sensitive logistics environment</li>
+          <li>Developed an end-to-end understanding of supply chain operations and cold chain constraints</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-role">Data Annotator (EN)</div>
+          <div class="timeline-date">Sep 2024 – May 2025</div>
+        </div>
+        <div class="timeline-company">Outlier</div>
+        <div class="timeline-location">📍 Remote · 9 mos</div>
+        <ul class="timeline-bullets">
+          <li>Contributed to AI model training through data annotation and validation</li>
+          <li>Ensured data accuracy and consistency following detailed labeling guidelines</li>
+          <li>Participated in quality control processes and gained exposure to machine learning workflows</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div class="timeline-role">Digital Marketing Intern</div>
+          <div class="timeline-date">Dec 2021</div>
+        </div>
+        <div class="timeline-company">ZeweeZ</div>
+        <div class="timeline-location">📍 Orléans, France</div>
+        <ul class="timeline-bullets">
+          <li>First professional marketing experience — digital marketing support for a local business</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Work I'm Proud Of</div>
+  <p class="section-sub">Concrete deliverables built across academic, professional, and personal contexts.</p>
+  <div class="projects-grid">
+
+    <!-- PROJECT 1: FVL MAP -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-tag">Marketing · Tech · Logistics</span>
+        <span class="project-date">Jun – Jul 2026</span>
+      </div>
+      <div class="project-title">Interactive FVL Compound Network Map</div>
+      <div class="project-org">CEVA Logistics — Finished Vehicle Logistics Europe</div>
+
+      <div class="project-section">
+        <div class="project-section-label">Context</div>
+        <p>CEVA Logistics' FVL Europe sales teams relied on static PowerPoint slides to present their compound network to clients — a format that lacked interactivity, flexibility and visual impact. As part of my internship, I identified this gap and proposed building a modern, interactive sales tool.</p>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">Objective</div>
+        <p>Design and develop a digital tool allowing sales teams to explore and showcase CEVA's European FVL network in real time during client meetings, replacing static slides with a product-grade interactive experience.</p>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">What I Built</div>
+        <ul class="project-bullets">
+          <li>Interactive map of 39 FVL compounds across 15 European countries, built with HTML, CSS, JavaScript and Leaflet.js — fully aligned with CEVA's brand identity</li>
+          <li>Dynamic compound dashboards with services, connectivity, certifications, and capacity data — sourced from a structured CSV database</li>
+          <li>Country highlight mode with zoom animation, compound labels, and a sidebar listing all compounds per country</li>
+          <li>Smart filtering by Port, Rail, EV Charging, and Workshop availability</li>
+          <li>Companion Python script allowing any team member to update the map by editing the CSV — no coding required</li>
+          <li>Complete documentation package (README, tutorial slide) left for the team</li>
+        </ul>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">Approach</div>
+        <p>Developed in collaboration with Claude (Anthropic's AI assistant), which I used as a technical partner throughout — directing the architecture, iterating on the UI, and driving all product decisions. End-to-end ownership from concept to delivery.</p>
+      </div>
+
+      <div class="project-impact">
+        <strong style="color:var(--gold)">Impact —</strong> Delivered a tool that transforms how CEVA's FVL sales teams present their network — moving from a static slide deck to a dynamic, client-facing digital experience. Fully autonomous, maintainable by non-technical staff, and ready to scale.
+      </div>
+
+      <div class="project-section" style="margin-top:20px;margin-bottom:0">
+        <div class="project-section-label">Skills Developed</div>
+        <div class="project-skills">
+          <span class="skill-tag">Front-end development</span>
+          <span class="skill-tag">UX / Product thinking</span>
+          <span class="skill-tag">Data structuring</span>
+          <span class="skill-tag">Brand integration</span>
+          <span class="skill-tag">Technical documentation</span>
+          <span class="skill-tag">AI-assisted development</span>
+          <span class="skill-tag">Stakeholder delivery</span>
+        </div>
+      </div>
+
+      <div class="project-stack" style="margin-top:12px">
+        <span class="stack-tag">HTML</span>
+        <span class="stack-tag">CSS</span>
+        <span class="stack-tag">JavaScript</span>
+        <span class="stack-tag">Leaflet.js</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Pillow</span>
+        <span class="stack-tag">Claude (Anthropic)</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: MARKET STUDY -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-tag">Market Research · Strategy</span>
+        <span class="project-date">May 2026</span>
+      </div>
+      <div class="project-title">Chinese OEM Market Study in Europe</div>
+      <div class="project-org">CEVA Logistics — FVL Division</div>
+
+      <div class="project-section">
+        <div class="project-section-label">Context</div>
+        <p>During my internship at CEVA Logistics, the FVL (Finished Vehicle Logistics) division needed to better understand the growing presence of Chinese automotive manufacturers in Europe and identify concrete business opportunities.</p>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">What I Did</div>
+        <ul class="project-bullets">
+          <li>Analysed the European automotive market landscape and competitive dynamics</li>
+          <li>Mapped all major Chinese OEM manufacturers active in Europe</li>
+          <li>Studied their communication strategies and market positioning</li>
+          <li>Conducted a full SWOT analysis of the opportunity for CEVA FVL</li>
+          <li>Identified pain points and decision criteria of Chinese OEMs as potential clients</li>
+          <li>Produced a media report and tracked recent product launches</li>
+          <li>Mapped Chinese OEM production sites in Europe and competition overview</li>
+        </ul>
+      </div>
+
+      <div class="project-impact">
+        <strong style="color:var(--gold)">Impact —</strong> The study was reviewed and appreciated by the Head of Sales Europe. It provided the FVL division with structured visibility on Chinese OEM trends and actionable commercial opportunities.
+      </div>
+
+      <div class="project-section" style="margin-top:20px;margin-bottom:0">
+        <div class="project-section-label">Skills Developed</div>
+        <div class="project-skills">
+          <span class="skill-tag">Market research</span>
+          <span class="skill-tag">Competitive analysis</span>
+          <span class="skill-tag">SWOT methodology</span>
+          <span class="skill-tag">B2B strategy</span>
+          <span class="skill-tag">Automotive sector knowledge</span>
+          <span class="skill-tag">Executive reporting</span>
+          <span class="skill-tag">Business development support</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: START'UP KIDS -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-tag">Event Management · Social Impact</span>
+        <span class="project-date">Oct 2025 – Apr 2026</span>
+      </div>
+      <div class="project-title">Start'Up Kids 2026 — Hackathon Co-organiser</div>
+      <div class="project-org">Université d'Orléans · Lab'O Village by Crédit Agricole</div>
+
+      <div class="project-section">
+        <div class="project-section-label">Context</div>
+        <p>Start'Up Kids is an annual hackathon designed for 12–15 year-olds from Étienne Dolet College in Orléans, focused on fostering creativity, teamwork, and entrepreneurial thinking. The 10th edition (2025–2026) tackled mental health and youth well-being — a national priority. The event was hosted at Lab'O Village, Orléans' leading startup incubator. I was part of the bachelor's and master's marketing student team that co-organised this milestone edition, with the support of the City of Orléans.</p>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">What I Did</div>
+        <ul class="project-bullets">
+          <li>Participated in defining the edition's theme and creative direction</li>
+          <li>Managed logistics: collected gifts, supplies, and event materials (roll-ups, kakemonos) from suppliers and partners including the City of Orléans</li>
+          <li>Created and managed social media content throughout the project</li>
+          <li>Designed and facilitated workshops on the day of the event</li>
+          <li>Participated in the selection process for service providers (catering, security, cleaning)</li>
+          <li>Presented the project before several public commissions to secure grant funding — obtained over €3,000</li>
+        </ul>
+      </div>
+
+      <div class="project-impact">
+        <strong style="color:var(--gold)">Impact —</strong> Contributed to an event that directly impacted young students from a challenging school environment. The edition received highly positive feedback from partners, the City of Orléans, and the regional council — which subsequently asked the team to create a replication kit to extend the initiative to other schools.
+      </div>
+
+      <div class="project-section" style="margin-top:20px;margin-bottom:0">
+        <div class="project-section-label">Skills Developed</div>
+        <div class="project-skills">
+          <span class="skill-tag">Project management</span>
+          <span class="skill-tag">Budget planning</span>
+          <span class="skill-tag">Public grant applications</span>
+          <span class="skill-tag">Stakeholder coordination</span>
+          <span class="skill-tag">Event logistics</span>
+          <span class="skill-tag">Social media content</span>
+          <span class="skill-tag">Public speaking</span>
+          <span class="skill-tag">Community impact</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4: STICKY TAPE -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-tag">Advertising · Creative · International</span>
+        <span class="project-date">Mar – Apr 2026</span>
+      </div>
+      <div class="project-title">Lipni Juosta / Sticky Tape Festival — Finalist 🏁</div>
+      <div class="project-org">Klaipėda State University (KVK) · Lithuania</div>
+
+      <div class="project-section">
+        <div class="project-section-label">Context</div>
+        <p>The Lipni Juosta / Sticky Tape Festival is an annual European advertising festival bringing together hundreds of marketing students to compete in creating short-format advertising content. During my BIP programme in Lithuania, I was invited to participate alongside two fellow IAE Orléans students. Our team represented France.</p>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">What I Did</div>
+        <ul class="project-bullets">
+          <li>Developed the creative concept and narrative thread for the video</li>
+          <li>Wrote the script and shooting plan</li>
+          <li>Produced the full intro and outro editing of the final video</li>
+        </ul>
+      </div>
+
+      <div class="project-section">
+        <div class="project-section-label">Topic</div>
+        <p>Our video focused on sustainability and social responsibility — produced in under two weeks as part of the BIP programme.</p>
+      </div>
+
+      <div class="project-impact">
+        <strong style="color:var(--gold)">Impact —</strong> Our video was selected by the jury committee to advance to the finals — among the top 35 out of over 250 participants from across Europe. We were the only French entry to reach the finals.
+      </div>
+
+      <div class="project-section" style="margin-top:20px;margin-bottom:0">
+        <div class="project-section-label">Skills Developed</div>
+        <div class="project-skills">
+          <span class="skill-tag">Creative strategy</span>
+          <span class="skill-tag">Scriptwriting</span>
+          <span class="skill-tag">Video editing</span>
+          <span class="skill-tag">Cross-cultural teamwork</span>
+          <span class="skill-tag">International competition</span>
+          <span class="skill-tag">Advertising fundamentals</span>
+          <span class="skill-tag">Time management under pressure</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Certifications</div>
+  <div class="section-title">Credentials</div>
+  <p class="section-sub">Internationally recognised qualifications and programmes.</p>
+  <div class="cert-grid">
+
+    <div class="cert-card">
+      <div class="cert-icon">🇺🇸</div>
+      <div class="cert-name">TOEFL iBT</div>
+      <div class="cert-issuer">ETS — Educational Testing Service</div>
+      <div class="cert-date">Issued February 2026</div>
+      <div class="cert-score">118 / 120 — C2 Level</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-name">McKinsey Forward</div>
+      <div class="cert-issuer">McKinsey & Company</div>
+      <div class="cert-date">Issued June 2026</div>
+      <div style="margin-top:10px;font-size:13px;color:var(--muted2)">Leadership, problem-solving, and professional skills programme</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon">🇨🇳</div>
+      <div class="cert-name">HSK Level 1</div>
+      <div class="cert-issuer">Hanban — Chinese Proficiency Test</div>
+      <div class="cert-date">Issued December 2025</div>
+      <div class="cert-score">150 / 200</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="justify-content:center">Contact</div>
+  <div class="contact-title">Let's Connect</div>
+  <p class="contact-sub">Open to opportunities in Supply Chain, International Business, and Global Marketing.</p>
+  <div class="contact-links">
+    <a href="mailto:rezaiguiaadam1@gmail.com" class="contact-link">
+      <span>✉</span> rezaiguiaadam1@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/adam-rezaiguia-b12a14283" target="_blank" class="contact-link">
+      <span>in</span> LinkedIn
+    </a>
+    <a href="#" class="contact-link">
+      <span>⬇</span> Download CV
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Adam Rezaiguia</span>
+  <span>Qingdao, China · Mobile Worldwide</span>
+  <span>Built with intention.</span>
+</footer>
+
+<script>
+// NAV scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Location cycling — hero signature element
+const locations = [
+  'Orléans, France',
+  'Ormes, France',
+  'Bucharest, Romania',
+  'Klaipėda, Lithuania',
+  'Munich, Germany',
+  'Qingdao, China →',
+];
+const el = document.getElementById('location-cycle');
+let i = 0;
+function cycleLocation() {
+  el.style.opacity = '0';
+  setTimeout(() => {
+    i = (i + 1) % locations.length;
+    el.textContent = locations[i];
+    el.style.opacity = '1';
+  }, 300);
+}
+el.style.transition = 'opacity 0.3s';
+el.textContent = locations[locations.length - 1];
+setInterval(cycleLocation, 2200);
+
+// Scroll-triggered fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.edu-card, .timeline-card, .project-card, .cert-card, .stat-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
